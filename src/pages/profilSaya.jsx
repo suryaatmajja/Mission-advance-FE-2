@@ -92,7 +92,7 @@ const Profil = () => {
   };
 
   const menuItems = [
-    { name: "Series", path: "/#" },
+    { name: "Series", path: "/series" },
     { name: "Film", path: "/#" },
     { name: "Daftar Saya", path: "/daftar-saya" },
   ];

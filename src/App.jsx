@@ -10,6 +10,7 @@ import Beranda from "./pages/Beranda";
 import Series from "./pages/series";
 import Profil from "./pages/profilSaya";
 import DaftarSaya from "./pages/daftarSaya";
+import ListView from "./pages/listView";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/series" element={<Series />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/daftar-saya" element={<DaftarSaya />} />
+        <Route path="/list-view" element={<ListView />} />
       </Routes>
     </Router>
   );

@@ -88,6 +88,15 @@ const Navbar = ({ menuItems, logo }) => {
               <li className="flex items-center bg-[rgba(24,26,28,1)] w-[113px] h-[32px] text-lato text-[10px] hover:bg-[rgba(40,40,40,1)] hover:text-[rgba(50,84,255,1)] cursor-pointer md:w-[156px] md:h-[40px] md:text-[14px]">
                 <img
                   className="w-[16px] h-[16px] mr-[4px] ml-[12px] md:w-[24px] md:h-[24px]"
+                  src="/assets/list-view.png"
+                  alt="profil"
+                />
+                <Link to="/list-view">List View</Link>
+              </li>
+
+              <li className="flex items-center bg-[rgba(24,26,28,1)] w-[113px] h-[32px] text-lato text-[10px] hover:bg-[rgba(40,40,40,1)] hover:text-[rgba(50,84,255,1)] cursor-pointer md:w-[156px] md:h-[40px] md:text-[14px]">
+                <img
+                  className="w-[16px] h-[16px] mr-[4px] ml-[12px] md:w-[24px] md:h-[24px]"
                   src="/assets/star.png"
                   alt="premium"
                 />
