@@ -1,31 +1,81 @@
-// store/redux/dataSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  getData,
+  createData,
+  updateData,
+  deleteData,
+} from "../../service/api/userService";
 
+// --- Thunks (async actions) ---
+export const fetchUsers = createAsyncThunk("data/fetchUsers", async () => {
+  const users = await getData();
+  return users;
+});
+
+export const createUser = createAsyncThunk(
+  "data/createUser",
+  async (newUser) => {
+    const user = await createData(newUser);
+    return user;
+  }
+);
+
+export const editUser = createAsyncThunk(
+  "data/editUser",
+  async ({ id, updatedUser }) => {
+    const user = await updateData(id, updatedUser);
+    return user;
+  }
+);
+
+export const removeUser = createAsyncThunk("data/removeUser", async (id) => {
+  await deleteData(id);
+  return id;
+});
+
+// --- Slice ---
 const dataSlice = createSlice({
-  name: "dataAPI",
+  name: "data",
   initialState: {
-    items: [], // state awal array kosong
+    items: [],
+    loading: false,
+    error: null,
   },
-  reducers: {
-    setData: (state, action) => {
-      state.items = action.payload; // simpan hasil API ke state
-    },
-    addData: (state, action) => {
+  reducers: {}, // kita nggak butuh reducers manual sekarang
+  extraReducers: (builder) => {
+    // GET
+    builder
+      .addCase(fetchUsers.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+
+    // CREATE
+    builder.addCase(createUser.fulfilled, (state, action) => {
       state.items.push(action.payload);
-    },
-    updateData: (state, action) => {
-      const index = state.items.findIndex(
-        (item) => item.id === action.payload.id
-      );
+    });
+
+    // UPDATE
+    builder.addCase(editUser.fulfilled, (state, action) => {
+      const index = state.items.findIndex((u) => u.id === action.payload.id);
       if (index !== -1) {
         state.items[index] = action.payload;
       }
-    },
-    deleteData: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-    },
+    });
+
+    // DELETE
+    builder.addCase(removeUser.fulfilled, (state, action) => {
+      state.items = state.items.filter((u) => u.id !== action.payload);
+    });
   },
 });
 
-export const { setData, addData, updateData, deleteData } = dataSlice.actions;
 export default dataSlice.reducer;
