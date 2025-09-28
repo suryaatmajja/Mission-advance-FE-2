@@ -22,17 +22,25 @@ const ListView = () => {
           </button>
         </Link>
 
-        <div className="relative w-auto h-full bg-[rgba(225,226,226,1)] rounded-xl mt-5 py-4 mx-3">
-          <h2 className="text-xs pl-4 underline ">Username</h2>
-          <h3 className="text-sm pl-4 mt-1 mr-45 ">Bonbon</h3>
+        <div className="relative w-auto h-full bg-[rgba(225,226,226,1)] rounded-xl mt-5 py-4 mx-3 md:mx-95">
+          <div className="flex justify-between items-center px-4">
+            <div>
+              <h2 className="text-xs underline">Username</h2>
+              <h3 className="text-sm mt-1">Bonbon</h3>
+            </div>
 
-          <button className="absolute hover:font-semibold bg-[rgba(255,209,70,1)] hover:bg-[rgba(255,195,20,1)] cursor-pointer w-auto h-auto px-2 py-1 rounded-lg text-sm -mt-8 ml-53 ">
-            Edit
-          </button>
+            <div className="flex items-center gap-2">
+              <Link to="/profil">
+                <button className="hover:font-semibold bg-[rgba(255,209,70,1)] hover:bg-[rgba(255,195,20,1)] cursor-pointer px-2 py-1 rounded-lg text-sm">
+                  Edit
+                </button>
+              </Link>
 
-          <button className="absolute hover:font-semibold bg-[rgba(227,61,49,1)] hover:bg-[rgba(204,54,44,1)] cursor-pointer w-auto h-auto px-2 py-1 rounded-lg text-sm -mt-8 ml-65 ">
-            Delete
-          </button>
+              <button className="hover:font-semibold bg-[rgba(227,61,49,1)] hover:bg-[rgba(204,54,44,1)] cursor-pointer px-2 py-1 rounded-lg text-sm">
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>

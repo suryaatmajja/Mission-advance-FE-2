@@ -37,7 +37,7 @@ const Register = () => {
 
   return (
     <div
-      className="relative h-screen bg-cover bg-center flex items-center justify-center"
+      className="relative h-full py-7 bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: "url('/assets/background2.jpg')" }}
     >
       <form
