@@ -50,7 +50,7 @@ const ListView = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <Link to={`/profil/${user.id}`}>
+                <Link to={`/profile/${user.id}`}>
                   <button className="hover:font-semibold bg-[rgba(255,209,70,1)] hover:bg-[rgba(255,195,20,1)] cursor-pointer px-2 py-1 rounded-lg text-sm md:text-lg">
                     Edit
                   </button>

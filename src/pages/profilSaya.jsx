@@ -1,26 +1,28 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { removeUser } from "../store/redux/dataSlice";
+import { useDispatch } from "react-redux";
+import { getData, updateData } from "../service/api/userService";
 import NavBar from "../components/navBar";
 import FormProfil from "../components/formProfil";
 import EditProfil from "../components/editProfil";
 import MyList from "../components/myListContainer";
 import Footer from "../components/footer";
-import useUser from "../hooks/useUser";
+// import useUser from "../hooks/useUser";
 
 const Profil = () => {
-  const { fetchUser, updateUser, deleteUser } = useUser();
+  const { userId: paramId } = useParams();
+  const userId = paramId || localStorage.getItem("userId");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState("/assets/poto-profil.png");
-
   const [loading, setLoading] = useState(true);
 
   const [subscribePhoto] = useState("/assets/Belum-berlangganan.png");
-
-  const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     const loadUser = async () => {
@@ -30,11 +32,12 @@ const Profil = () => {
       }
 
       try {
-        const data = await fetchUser(userId);
-        if (data) {
-          setUsername(data.username || "");
-          setEmail(data.email || "");
-          setPassword(data.password || "");
+        const data = await getData();
+        const current = data.find((u) => String(u.id) === String(userId));
+        if (current) {
+          setUsername(current.username || "");
+          setEmail(current.email || "");
+          setPassword(current.password || "");
         }
 
         const savedPhoto = localStorage.getItem("profilePhoto");
@@ -51,7 +54,7 @@ const Profil = () => {
 
   const handleSave = async () => {
     try {
-      const updated = await updateUser(userId, { username, email, password });
+      const updated = await updateData(userId, { username, email, password });
 
       setUsername(updated.username || "");
       setEmail(updated.email || "");
@@ -73,22 +76,18 @@ const Profil = () => {
 
   // Hapus akun
   const handleDeleteAccount = async () => {
-    try {
-      await deleteUser(userId);
-      localStorage.removeItem("userId");
-      localStorage.removeItem("profilePhoto");
+    if (!userId) return alert("user tidak ditemukan !");
+    dispatch(removeUser(userId));
+    localStorage.removeItem("userId");
+    localStorage.removeItem("profilePhoto");
 
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setPhoto("/assets/poto-profil.png");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setPhoto("/assets/poto-profil.png");
 
-      alert("Akun berhasil dihapus!");
-      navigate("/register");
-    } catch (error) {
-      console.error("Error deleting account:", error);
-      alert("Gagal menghapus akun!");
-    }
+    alert("Akun berhasil dihapus!");
+    navigate("/register");
   };
 
   const menuItems = [
@@ -164,12 +163,14 @@ const Profil = () => {
             >
               Simpan
             </button>
+
             <button
               onClick={handleAddAccount}
               className="bg-[rgba(231,227,252,0.23)] cursor-pointer hover:bg-[rgba(9,20,122,1)]  rounded-full mt-6.5 text-sm w-25 h-8 mr-2 md:text-base md:font-bold md:w-37.5 md:h-10.5 md:mr-4 md:mt-8 "
             >
               Tambah Akun
             </button>
+
             <button
               onClick={handleDeleteAccount}
               className="bg-[rgba(231,227,252,0.23)] cursor-pointer hover:bg-[rgba(9,20,122,1)]  rounded-full mt-6.5 text-sm w-25 h-8 md:text-base md:font-bold md:w-37.5 md:h-10.5 md:mt-8 "

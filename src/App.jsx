@@ -22,7 +22,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/beranda" element={<Beranda />} />
         <Route path="/series" element={<Series />} />
-        <Route path="/profil" element={<Profil />} />
+        <Route path="/profile/:id" element={<Profil />} />
         <Route path="/daftar-saya" element={<DaftarSaya />} />
         <Route path="/list-view" element={<ListView />} />
       </Routes>
