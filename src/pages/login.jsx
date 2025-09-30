@@ -1,21 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputField from "../components/input";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../store/redux/authSlice";
 import InputPassword from "../components/inputPassword";
 import Button from "../components/button";
 import Logo from "../components/logo";
 import useUser from "../hooks/useUser";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loginUser } = useUser();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { loginUser } = useUser();
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await loginUser(username, password);
+      const userData = await loginUser(username, password);
+      dispatch(loginSuccess(userData));
       alert("Welcome!");
       navigate("/Beranda");
     } catch (err) {

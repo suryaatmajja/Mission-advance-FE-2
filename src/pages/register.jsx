@@ -37,12 +37,12 @@ const Register = () => {
 
   return (
     <div
-      className="relative h-full py-7 bg-cover bg-center flex items-center justify-center"
+      className="relative h-screen md:h-full md:py-7 bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: "url('/assets/background2.jpg')" }}
     >
       <form
         onSubmit={handleRegister}
-        className="bg-[rgba(24,26,28,0.84)] text-white rounded-[8px] w-[306px] h-[500px] 
+        className="bg-[rgba(24,26,28,0.84)] text-white rounded-[8px] w-[306px] h-[515px] 
         md:w-[530px] md:h-[825px] md:rounded-[16px]"
       >
         <Logo />
