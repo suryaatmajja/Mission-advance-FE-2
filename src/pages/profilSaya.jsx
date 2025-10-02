@@ -11,7 +11,7 @@ import Footer from "../components/footer";
 // import useUser from "../hooks/useUser";
 
 const Profil = () => {
-  const { userId: paramId } = useParams();
+  const { Id: paramId } = useParams();
   const userId = paramId || localStorage.getItem("userId");
   const dispatch = useDispatch();
   const navigate = useNavigate();
