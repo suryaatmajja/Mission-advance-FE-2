@@ -8,7 +8,6 @@ import FormProfil from "../components/formProfil";
 import EditProfil from "../components/editProfil";
 import MyList from "../components/myListContainer";
 import Footer from "../components/footer";
-// import useUser from "../hooks/useUser";
 
 const Profil = () => {
   const { Id: paramId } = useParams();

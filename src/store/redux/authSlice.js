@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: null, // default kosong
+  user: null,
 };
 
 const authSlice = createSlice({
@@ -9,7 +9,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      state.user = action.payload; // simpan user (id, name, photo, dll)
+      state.user = action.payload;
       localStorage.setItem("user", JSON.stringify(action.payload));
     },
     logout: (state) => {

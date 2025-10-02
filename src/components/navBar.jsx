@@ -7,7 +7,6 @@ const Navbar = ({ menuItems, logo }) => {
   const user = useSelector((state) => state.auth.user);
   const [profileImg, setProfileImg] = useState("/assets/profil.png");
 
-  // Ambil foto profil dari localStorage
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     if (savedUser?.photo) {
@@ -15,7 +14,6 @@ const Navbar = ({ menuItems, logo }) => {
     }
   }, []);
 
-  // perubahan localStorage
   useEffect(() => {
     const handleStorageChange = () => {
       const savedUser = JSON.parse(localStorage.getItem("user"));

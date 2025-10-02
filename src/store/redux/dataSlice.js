@@ -6,7 +6,6 @@ import {
   deleteData,
 } from "../../service/api/userService";
 
-// --- Thunks (async actions) ---
 export const fetchUsers = createAsyncThunk("data/fetchUsers", async () => {
   const users = await getData();
   return users;
@@ -33,7 +32,6 @@ export const removeUser = createAsyncThunk("data/removeUser", async (id) => {
   return id;
 });
 
-// --- Slice ---
 const dataSlice = createSlice({
   name: "data",
   initialState: {
@@ -41,7 +39,7 @@ const dataSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {}, // kita nggak butuh reducers manual sekarang
+  reducers: {},
   extraReducers: (builder) => {
     // GET
     builder
